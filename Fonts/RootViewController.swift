@@ -68,4 +68,23 @@ class RootViewController: UITableViewController {
             return tableView.dequeueReusableCell(withIdentifier: favoritesCell, for: indexPath) as UITableViewCell
         }
     }
+    
+    //Mark: Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let indexPath = tableView.indexPath(for: sender as! UITableViewCell)
+        let listVC = segue.destination as! FontListViewController
+        
+        if(indexPath?.section == 0) {
+            //Список имен шрифтов
+            let familyName = familyNames[(indexPath?.row)!]
+            listVC.fontNames = (UIFont.fontNames(forFamilyName: familyName) as [String]).sorted()
+            listVC.navigationItem.title = familyName
+            listVC.showFavorites = false
+        } else {
+            //Список избранных шрифтов
+            listVC.fontNames = favoritesList.favorites
+            listVC.navigationItem.title = "Избранное"
+            listVC.showFavorites = true
+        }
+    }
 }
