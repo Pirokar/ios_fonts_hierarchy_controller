@@ -55,14 +55,16 @@ class RootViewController: UITableViewController {
         if indexPath.section == 0 {
             // Список имен шрифтов
             cell = tableView.dequeueReusableCell(withIdentifier: familyCell, for: indexPath) as UITableViewCell
+            cell.textLabel?.font = fontToDisplay(atIndexPath: indexPath)
+            cell.textLabel?.text = familyNames[indexPath.row]
+            cell.detailTextLabel?.text = familyNames[indexPath.row]
         } else {
             //Список избранных шрифтов
             cell = tableView.dequeueReusableCell(withIdentifier: favoritesCell, for: indexPath) as UITableViewCell
+            cell.textLabel?.text = "Просмотреть"
         }
         
-        cell.textLabel?.font = fontToDisplay(atIndexPath: indexPath)
-        cell.textLabel?.text = familyNames[indexPath.row]
-        cell.detailTextLabel?.text = familyNames[indexPath.row]
+        
         
         return cell
     }
