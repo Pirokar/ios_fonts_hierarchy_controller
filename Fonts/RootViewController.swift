@@ -32,14 +32,10 @@ class RootViewController: UITableViewController {
     }
     
     func fontToDisplay(atIndexPath indexPath: IndexPath) -> UIFont? {
-        if indexPath.section == 0 {
-            let familyName = familyNames[indexPath.row]
-            let fontName = UIFont.fontNames(forFamilyName: familyName).first
+        let familyName = familyNames[indexPath.row]
+        let fontName = UIFont.fontNames(forFamilyName: familyName).first
             
-            return fontName != nil ? UIFont(name: fontName!, size: cellPointSize) : nil
-        } else {
-            return nil
-        }
+        return fontName != nil ? UIFont(name: fontName!, size: cellPointSize) : nil
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -55,18 +51,20 @@ class RootViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell: UITableViewCell!
         if indexPath.section == 0 {
             // Список имен шрифтов
-            let cell = tableView.dequeueReusableCell(withIdentifier: familyCell, for: indexPath) as UITableViewCell
-            cell.textLabel?.font = fontToDisplay(atIndexPath: indexPath)
-            cell.textLabel?.text = familyNames[indexPath.row]
-            cell.detailTextLabel?.text = familyNames[indexPath.row]
-            
-            return cell
+            cell = tableView.dequeueReusableCell(withIdentifier: familyCell, for: indexPath) as UITableViewCell
         } else {
             //Список избранных шрифтов
-            return tableView.dequeueReusableCell(withIdentifier: favoritesCell, for: indexPath) as UITableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: favoritesCell, for: indexPath) as UITableViewCell
         }
+        
+        cell.textLabel?.font = fontToDisplay(atIndexPath: indexPath)
+        cell.textLabel?.text = familyNames[indexPath.row]
+        cell.detailTextLabel?.text = familyNames[indexPath.row]
+        
+        return cell
     }
     
     //Mark: Navigation

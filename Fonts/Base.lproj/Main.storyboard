@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -45,12 +46,28 @@
                                     <segue destination="UkL-YD-WYp" kind="show" id="kWx-jH-lyA"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="HUb-xn-qI2">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Favorites" textLabel="1ee-bk-U8D" detailTextLabel="UgB-XQ-h50" style="IBUITableViewCellStyleSubtitle" id="HUb-xn-qI2">
                                 <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HUb-xn-qI2" id="0U2-dB-lFw">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1ee-bk-U8D">
+                                            <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UgB-XQ-h50">
+                                            <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="UkL-YD-WYp" kind="show" id="lUJ-le-9YF"/>
@@ -101,7 +118,8 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="mcU-vi-hE6" kind="show" id="Twd-VX-sNF"/>
+                                    <segue destination="mcU-vi-hE6" kind="show" identifier="ShowFontSizes" id="Twd-VX-sNF"/>
+                                    <segue destination="3Yt-u8-8ft" kind="show" identifier="ShowFontInfo" trigger="accessoryAction" id="U7A-Oi-Bml"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -158,6 +176,79 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZIf-Ox-baR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1876" y="132"/>
+        </scene>
+        <!--Font Info View Controller-->
+        <scene sceneID="bIt-fg-Bzx">
+            <objects>
+                <viewController id="3Yt-u8-8ft" customClass="FontInfoViewController" customModule="Fonts" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1wE-hA-bmz"/>
+                        <viewControllerLayoutGuide type="bottom" id="bto-Su-6NG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="c2N-Hw-Dfa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="934-Fg-pm1">
+                                <rect key="frame" x="310" y="570" width="51" height="31"/>
+                                <connections>
+                                    <action selector="toggleFavoriteWithSender:" destination="3Yt-u8-8ft" eventType="valueChanged" id="QLu-Lm-y0l"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добавить в избранное" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGU-7O-pc8">
+                                <rect key="frame" x="121" y="575" width="181" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="12" minValue="1" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="mDH-Cb-F9a">
+                                <rect key="frame" x="14" y="617" width="290" height="31"/>
+                                <connections>
+                                    <action selector="slideFontSizeWithSlider:" destination="3Yt-u8-8ft" eventType="valueChanged" id="DAw-Bt-QCm"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voo-DW-QSS">
+                                <rect key="frame" x="310" y="622" width="49" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CMt-Mz-sMQ">
+                                <rect key="frame" x="16" y="87" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="mDH-Cb-F9a" secondAttribute="bottom" constant="20" symbolic="YES" id="8hP-PY-wtm"/>
+                            <constraint firstItem="mDH-Cb-F9a" firstAttribute="centerY" secondItem="voo-DW-QSS" secondAttribute="centerY" id="9dE-sa-RKu"/>
+                            <constraint firstItem="rGU-7O-pc8" firstAttribute="centerY" secondItem="934-Fg-pm1" secondAttribute="centerY" id="K5q-VL-IjX"/>
+                            <constraint firstItem="934-Fg-pm1" firstAttribute="leading" secondItem="voo-DW-QSS" secondAttribute="leading" id="KWw-QA-Erg"/>
+                            <constraint firstItem="CMt-Mz-sMQ" firstAttribute="trailing" secondItem="c2N-Hw-Dfa" secondAttribute="trailingMargin" id="Oem-SU-FRJ"/>
+                            <constraint firstItem="mDH-Cb-F9a" firstAttribute="leading" secondItem="c2N-Hw-Dfa" secondAttribute="leadingMargin" id="Ug2-mu-Gei"/>
+                            <constraint firstItem="934-Fg-pm1" firstAttribute="trailing" secondItem="CMt-Mz-sMQ" secondAttribute="trailing" id="Zra-9G-xXW"/>
+                            <constraint firstItem="CMt-Mz-sMQ" firstAttribute="top" secondItem="1wE-hA-bmz" secondAttribute="bottom" constant="23" id="d27-Pa-Tjh"/>
+                            <constraint firstItem="voo-DW-QSS" firstAttribute="leading" secondItem="mDH-Cb-F9a" secondAttribute="trailing" constant="8" symbolic="YES" id="fyk-bF-ui2"/>
+                            <constraint firstItem="934-Fg-pm1" firstAttribute="leading" secondItem="rGU-7O-pc8" secondAttribute="trailing" constant="8" symbolic="YES" id="ioX-Xu-zXi"/>
+                            <constraint firstItem="934-Fg-pm1" firstAttribute="trailing" secondItem="voo-DW-QSS" secondAttribute="trailing" id="kdP-pC-9di"/>
+                            <constraint firstItem="mDH-Cb-F9a" firstAttribute="top" secondItem="rGU-7O-pc8" secondAttribute="bottom" constant="21" id="tZy-Uj-ras"/>
+                            <constraint firstItem="voo-DW-QSS" firstAttribute="leading" secondItem="mDH-Cb-F9a" secondAttribute="trailing" constant="8" id="vI5-qP-OVY"/>
+                            <constraint firstItem="rGU-7O-pc8" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CMt-Mz-sMQ" secondAttribute="bottom" constant="10" id="xTq-YI-px1"/>
+                            <constraint firstItem="CMt-Mz-sMQ" firstAttribute="leading" secondItem="c2N-Hw-Dfa" secondAttribute="leadingMargin" id="yG3-WO-weh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="favoriteSwitch" destination="934-Fg-pm1" id="sAH-a8-HJX"/>
+                        <outlet property="fontSampleLabel" destination="CMt-Mz-sMQ" id="OBW-7A-VVb"/>
+                        <outlet property="fontSizeLabel" destination="voo-DW-QSS" id="47q-Nc-y0O"/>
+                        <outlet property="fontSizeSlider" destination="mDH-Cb-F9a" id="df2-WP-U28"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CSO-Ur-kv7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1185" y="841"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="p9a-Po-P8J">
