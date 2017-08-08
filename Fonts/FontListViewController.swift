@@ -51,6 +51,16 @@ class FontListViewController: UITableViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let tableCell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: tableCell)
+        let font = fontForDisplay(atIndexPath: indexPath!)
+        
+        let sizesVC = segue.destination as! FontSizesViewController
+        sizesVC.title = font.fontName
+        sizesVC.font = font
+    }
+    
     func fontForDisplay(atIndexPath indexPath: IndexPath) -> UIFont {
         let fontName = fontNames[indexPath.row]
         return UIFont(name: fontName, size: cellPointSize)!
